@@ -1,0 +1,15 @@
+# blue_team_monitor.py
+import scapy.all as scapy
+
+def packet_handler(packet):
+    if packet.haslayer(scapy.IP):
+        src_ip = packet[scapy.IP].src
+        dst_ip = packet[scapy.IP].dst
+        print(f"Packet from {src_ip} to {dst_ip}")
+
+def main():
+    sniff_filter = "ip"  # Filter for IP packets
+    scapy.sniff(filter=sniff_filter, prn=packet_handler)
+
+if __name__ == "__main__":
+    main()
